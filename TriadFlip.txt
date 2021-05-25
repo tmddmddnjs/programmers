@@ -1,0 +1,41 @@
+#include <string>
+#include <vector>
+#include <algorithm>
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+int main() {
+	int answer = 0;
+	int number = 125;
+	vector<int> num_arr; // %된거
+	vector<int> num_arr2; // /된거
+
+	//10 -> 3
+	while (true) {
+		num_arr.push_back(number % 3); 
+		num_arr2.push_back(number / 3);
+		number = number / 3;
+		int n = num_arr2.size() - 1;
+		if (num_arr2.at(n) == 0) {
+			break;
+		}
+	}
+	for (int i = 0; i < num_arr.size(); i++) {
+		cout << num_arr[i] << " ";
+	}
+	cout << endl;
+
+	/*3 -> 10
+	for (int i = 0; i < num_arr.size(); i++) {
+		answer += num_arr[(num_arr.size()-1) - i] * (pow(3,i)); //i를 뒤부터 출력
+	} 
+	or 아래거*/
+	reverse(num_arr.begin(), num_arr.end());
+	for (int i = 0; i < num_arr.size(); i++) {
+		answer += num_arr[i] * pow(3, i);
+	}
+
+	cout << answer << " ";	
+}
