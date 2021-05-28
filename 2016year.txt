@@ -9,7 +9,7 @@ string solution(int a, int b) {
 	int month[12] = { 0,31,29,31,30,31,30,31,31,30,31,30 };
 	int sum = 0;
 	int total = 0;
-	/*
+	/* 방법1
 	if (a == 1) sum = b;
 	else if (a == 2) sum = 31 + b;
 	else if (a == 3) sum = 31 + 29 + b;
@@ -24,7 +24,7 @@ string solution(int a, int b) {
 	else if (a == 12)sum = 31 + 29 + 31 + 30 + 31 + 30 + 31 + 31 + 30 + 31 + 30 + b;
 	total = sum % 7;
 	answer = date[total];
-	*/
+	*/방법2
 	for (int i = 0; i < a; i++) {
 		sum += month[i];
 	}
