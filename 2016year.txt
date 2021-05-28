@@ -1,0 +1,40 @@
+#include <string>
+#include <vector>
+#include <iostream>
+using namespace std;
+
+string solution(int a, int b) {
+	string answer = "";
+	string date[7] = { "THU" ,"FRI", "SAT", "SUN", "MON", "TUE", "WED"};
+	int month[12] = { 0,31,29,31,30,31,30,31,31,30,31,30 };
+	int sum = 0;
+	int total = 0;
+	/*
+	if (a == 1) sum = b;
+	else if (a == 2) sum = 31 + b;
+	else if (a == 3) sum = 31 + 29 + b;
+	else if (a == 4) sum = 31 + 29 + 31 + b;
+	else if (a == 5) sum = 31 + 29 + 31 + 30 + b;
+	else if (a == 6) sum = 31 + 29 + 31 + 30 + 31 + b;
+	else if (a == 7) sum = 31 + 29 + 31 + 30 + 31 + 30 + b;
+	else if (a == 8) sum = 31 + 29 + 31 + 30 + 31 + 30 + 31 + b;
+	else if (a == 9) sum = 31 + 29 + 31 + 30 + 31 + 30 + 31 + 31 + b;
+	else if (a == 10)sum = 31 + 29 + 31 + 30 + 31 + 30 + 31 + 31 + 30 + b;
+	else if (a == 11)sum = 31 + 29 + 31 + 30 + 31 + 30 + 31 + 31 + 30 + 31 + b;
+	else if (a == 12)sum = 31 + 29 + 31 + 30 + 31 + 30 + 31 + 31 + 30 + 31 + 30 + b;
+	total = sum % 7;
+	answer = date[total];
+	*/
+	for (int i = 0; i < a; i++) {
+		sum += month[i];
+	}
+	total = (sum + b) % 7;
+	answer = date[total];
+	cout << answer;
+
+	return answer;
+}
+
+int main() {
+	solution(5, 24); //tue
+}
