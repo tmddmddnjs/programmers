@@ -1,0 +1,29 @@
+#include <string>
+#include <vector>
+#include <iostream>
+
+using namespace std;
+
+string solution(string s) {
+	string answer = "";
+	vector<char> str; 
+	int len = s.size();
+
+	if (s.size() % 2 == 1) {
+		answer = s.at(len / 2);
+	}
+	else {
+		answer = s.substr((len / 2) - 1, 2);
+	}
+
+	return answer;
+}
+
+int main() {
+	string s = "abcde"; //c
+	string s2 = "qwer"; //we
+	solution(s);
+	solution(s2);
+
+	cout << "solution(s) : " << solution(s) << endl << "solution(s2) : " << solution(s2) << endl;
+}
