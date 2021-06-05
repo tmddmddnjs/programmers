@@ -1,0 +1,29 @@
+#include <string>
+#include <iostream>
+#include <vector>
+using namespace std;
+
+bool solution(string s){
+	bool answer = true;
+	vector<char> str;
+	vector<char> p_size;
+	vector<char> y_size;
+	for (int i = 0; i < s.length(); i++) {
+		str.push_back(s[i]);
+	}
+	for (int i = 0; i < str.size(); i++) {
+		if (str.at(i) == 'p' || str.at(i) == 'P')
+			p_size.push_back(str[i]);
+		else if (str.at(i) == 'y' || str.at(i) == 'Y')
+			y_size.push_back(str[i]);
+	}
+
+	return (y_size.size() == p_size.size()) ? answer = true : answer = false;
+}
+
+int main() {
+	string str = "pPoooyY";
+	string str2 = "Pyy";
+	solution(str); //true
+	solution(str2); // false
+}
