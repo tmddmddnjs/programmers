@@ -1,0 +1,37 @@
+#include <iostream>
+using namespace std;
+#include <vector>
+#include <string>
+#include <algorithm> //sort쓸 수 있게 해주는 알고리즘
+
+/*
+string solution(string s) {
+	string answer = "";
+	sort(s.begin(), s.end(), greater<char>()); //내림차순 알아서
+	for (int i = 0; i < s.size(); i++) {
+		answer += s[i];
+	}
+	return answer;
+}
+*/
+
+string solution(string s) {
+	string answer = "";
+	vector<char> str;
+	for (int i = 0; i < s.length(); i++) {
+		str.push_back(s[i]);
+	}
+	sort(str.begin(), str.end(), greater<char>());
+	for (int i = 0; i < str.size(); i++) {
+		answer += str[i];
+	}
+	return answer;
+
+}
+
+int main() {
+	string str = "bascfZfD"; //sffcbaZD
+	cout << solution(str) << endl;
+
+	return 0;
+}
