@@ -1,0 +1,36 @@
+#include <string>
+#include <vector>
+#include <iostream>
+using namespace std;
+
+int solution(int left, int right) {
+	int answer = 0;
+	vector<int> count;
+	vector<int> number;
+	int c = 0;
+	for (int i = left; i <= right; i++) 
+		count.push_back(i);
+	
+	for (int i = 0; i < count.size(); i++) {
+		for (int j = 1; j <= count[i]; j++) {
+			if (count[i] % j == 0) c++;
+		}
+		number.push_back(c);
+		c = 0;
+	}
+	for (int i = 0; i < number.size(); i++) {
+		//짝수개라면
+		if (number[i] % 2 == 0) 
+			answer += count[i];
+		//홀수개라면
+		else 
+			answer -= count[i];
+	}
+
+	return answer;
+}
+//짝수개 +, 홀수개 -
+int main() {
+	solution(13, 17);//43
+	//solution(24, 27);//52
+}
