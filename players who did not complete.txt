@@ -1,0 +1,63 @@
+#include <string>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+string solution(vector<string> participant, vector<string> completion) {
+	string answer = "";
+	bool sameName = false;
+
+	//중복된 이름이 없는지 확인
+	for (int i = 0; i < participant.size(); i++)
+	{
+		for (int j = i + 1; j < participant.size(); j++)
+		{
+			if (participant[i] == participant[j])
+				sameName = true;
+		}
+	}
+
+	//participant에 중복 이름이 있는 경우
+	if (sameName == true) {
+		sort(completion.begin(), completion.end());
+		sort(participant.begin(), participant.end());
+		for (int i = 0; i < participant.size(); i++) {
+			if (participant[i] != completion[i]) {
+				answer = participant[i];
+				cout << answer << ' ';
+				return answer;
+			}
+		}
+		answer = participant[participant.size() - 1];
+		cout << answer << ' ';
+		return answer;
+	}
+	//participant에 중복 이름이 없는 경우
+	else {
+		vector<int> count(participant.size(), 0);
+		for (int i = 0; i < participant.size(); i++) {
+			for (int j = 0; j < completion.size(); j++) {
+				//완주를 한 학생은 count가 하나 덜 된다.
+				if (participant[i] != completion[j]) {
+					count[i]++;
+				}
+			}
+			//다른 count들 보다 1이 더 큰 애가 완주 못한 친구임
+			if (count[i] == completion.size())
+				answer = participant[i];
+		}
+		cout << answer << ' ';
+		return answer;
+	}
+}
+
+int main() {
+	solution({ "leo", "kiki", "eden" }, { "eden", "kiki" });
+	//"leo"
+	solution({ "marina", "josipa", "nikola", "vinko", "filipa" }, 
+		{ "josipa", "filipa", "marina", "nikola" });
+	//"vinko"
+	solution({ "mislav", "stanko", "mislav", "ana" }, { "stanko", "ana", "mislav" });
+	//"mislav"
+}
