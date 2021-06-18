@@ -1,0 +1,40 @@
+#include <string>
+#include <vector>
+#include <iostream>
+using namespace std;
+
+//vector를 쓰니깐 스페이스바가 적용이 안되네
+string solution(string s) {
+	string answer = "";
+	int count = 0;
+
+	for (int i = 0; i < s.length(); i++) {
+		if (s[i] == ' ') {
+			count = 0;
+			continue;
+		}
+		if (count % 2 == 0)
+			s[i] = toupper(s[i]);
+		else 
+			s[i] = tolower(s[i]);
+		count++;
+	}
+	for (int i = 0; i < s.size(); i++)
+		cout << s[i];
+	cout << endl;
+	for (int i = 0; i < s.size(); i++)
+		answer += s[i];
+	return answer;
+}
+
+int main() {
+	string s = "try hello world";
+	cout << "try hello world" << endl;
+	if (solution(s) == "TrY HeLlO WoRlD") cout << "s = correct" << endl;
+	else cout << "s = noncorrect" << endl;
+
+	string s2 = "try an hell wold";
+	cout << "try an hell wold" << endl;
+	if (solution(s2) == "TrY An HeLl WoLd") cout << "s2 = correct" << endl;
+	else cout << "s2 = noncorrect" << endl;
+}
