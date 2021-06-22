@@ -1,0 +1,19 @@
+#include <string>
+#include <vector>
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+long long solution(long long n) {
+	long long answer = 0;
+	int num;
+	num = sqrt(n);
+	answer = (n == pow(num, 2.0)) ? pow(num + 1, 2.0) : -1;
+	cout << n << ' ' << sqrt(n) << ' ' << pow(num, 2.0) << endl;
+	return answer;
+}
+
+int main() {
+	solution(121); //144
+	solution(3); //-1
+}
