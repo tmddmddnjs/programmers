@@ -1,0 +1,129 @@
+#include <string>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+string solution(string new_id) {
+	string answer = "";
+	vector<char> temp;
+	vector<char> empty;
+	//1단계, 문자를 다 돌면서 대문자면 소문자로 바꿈
+	for (int i = 0; i < new_id.length(); i++) {
+		if ('A' <= new_id[i] && new_id[i] <= 'Z')
+			temp.push_back(new_id[i] + 32);
+		else
+			temp.push_back(new_id[i]);
+	}
+	for (int i = 0; i < temp.size(); i++)
+		new_id[i] = temp[i];
+	for (int i = 0; i < temp.size(); i++)
+		cout << temp[i];
+	cout << endl;
+	temp.clear();
+
+	//2단계 소문자, 숫자, -, _, . 외에 문자열을 다 삭제
+	for (int i = 0; i < new_id.length(); i++) {
+		if (('a' <= new_id[i] && new_id[i] <= 'z') ||
+			'1' <= new_id[i] && new_id[i] <= '9' ||
+			new_id[i] == '-' ||
+			new_id[i] == '_' ||
+			new_id[i] == '.' )
+			temp.push_back(new_id[i]);
+	}
+
+	for (int i = 0; i < temp.size(); i++)
+		cout << temp[i];
+	cout << endl;
+
+	//3단계 '.'이 중복되면 안되기 때문에 중복된건 하나로만 표시한다.
+	while (true) {
+		int i = 0;
+		if (temp[i] == '.' && temp.size() == 1)
+			break;
+		while (true) {
+			if (temp[i] == '.' && temp[i + 1] == '.') {
+				temp.erase(temp.begin() + i);
+				break;
+			}
+			i++;
+			if (i >= temp.size()) break;
+		}
+		if (i >= temp.size() - 1) break;
+	}
+	for (int i = 0; i < temp.size(); i++)
+		cout << temp[i];
+	cout << endl;
+	//for (int i = 1; i < temp.size(); ) {
+	//	if (temp[i] == '.' && temp[i - 1] == '.') {
+	//		temp.erase(temp.begin() + i);
+	//		continue;
+	//	}
+	//	else i++;
+	//}
+
+	//4단계 제일 앞과 뒤의 .은 없애야함
+	if (temp.front() == '.')
+		temp.erase(temp.begin());
+	else if (temp.back() == '.')
+		temp.erase(temp.end()- 1);
+	for (int i = 0; i < temp.size(); i++) {
+		cout << temp[i];
+	}
+	cout << endl;
+
+	//5단계 빈 문자열인지 확인
+	if (temp.empty()) {
+		temp.push_back('a');
+	}
+	for (int i = 0; i < temp.size(); i++) {
+		cout << temp[i];
+	}
+	cout << endl;
+
+	//6단계 15자까지만 허용
+	if (temp.size() > 15) {
+		for (int i = 0; i < 15; i++)
+			empty.push_back(temp[i]);
+	}
+	else {
+		for (int i = 0; i < temp.size(); i++)
+			empty.push_back(temp[i]);
+	}
+	for (int i = 0; i < empty.size(); i++) {
+		cout << empty[i];
+	}
+	cout << endl;
+	temp.empty();
+
+	//15까지 허용으로 지우고 난 후 처음과 끝에 .이 있는지 다시 확인
+	if (empty[empty.size() - 1] == '.')
+		empty.erase(empty.end() - 1);
+
+	//7단계 2자 이상만 허용
+	if (empty.size() <= 2) {
+		//char c = empty[empty.size()-1];
+		char c = empty.back();
+		while (empty.size() < 3) 
+			empty.push_back(c);
+	}
+	for (int i = 0; i < empty.size(); i++) {
+		cout << empty[i];
+	}
+	cout << endl;
+
+	for (int i = 0; i < empty.size(); i++) {
+		answer += empty[i];
+	}
+	cout << endl;
+
+	return answer;
+}
+
+int main() {
+	solution("...!@BaT#*..y.abcdefghijklm"); //"bat.y.abcdefghi"
+	solution("z-+.^."); //"z--"
+	solution("=.="); //"aaa"
+	solution("123_.def"); //"123_.def"
+	solution("abcdefghijklmn.p"); //"abcdefghijklmn"
+}
